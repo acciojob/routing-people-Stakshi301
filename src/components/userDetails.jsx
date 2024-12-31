@@ -1,30 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-
+ 
 function UserDetails() {
-  const { id } = useParams();
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-
+  const { id } = useParams(); // Get user ID from URL params
+  const [user, setUser] = useState(null); // State to store user data
+  const [loading, setLoading] = useState(true); // State for loading status
+ 
   useEffect(() => {
+    // Simulating a slow network request by adding a delay
     setTimeout(() => {
       fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
         .then((response) => response.json())
         .then((data) => {
-          setUser(data);
-          setLoading(false);
+          setUser(data); // Set fetched user data to state
+          setLoading(false); // Set loading to false after data is fetched
         })
         .catch((error) => {
           console.error("Error fetching user data:", error);
-          setLoading(false);
+          setLoading(false); // Stop loading even if there's an error
         });
-    }, 1000);
+    }, 1000); // Simulated delay of 1 second
   }, [id]);
-
+ 
+  // Show loading message only when loading is true
   if (loading) {
     return <p>Loading...</p>;
   }
-
+ 
+  // Render user details once data is fetched
   return (
     <div>
       {user ? (
@@ -42,5 +45,5 @@ function UserDetails() {
     </div>
   );
 }
-
+ 
 export default UserDetails;
