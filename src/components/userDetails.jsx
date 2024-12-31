@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-function UserDetails() {
+function userDetails() {
   const { id } = useParams();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -43,4 +43,4 @@ function UserDetails() {
   );
 }
 
-export default UserDetails;
+export default userDetails;
