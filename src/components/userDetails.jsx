@@ -1,45 +1,46 @@
-import react,  { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
-const UserDetails = () => {
-  const { id } = useParams(); 
+function UserDetails() {
+  const { id } = useParams();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchUserDetails = async () => {
-      try {
-        const response = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
-        const data = await response.json();
-        setUser(data); 
-      } catch (error) {
-        console.error("Error fetching user details:", error);
-      } finally {
-        setLoading(false); 
-      }
-    };
-
-    fetchUserDetails();
+    setTimeout(() => {
+      fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
+        .then((response) => response.json())
+        .then((data) => {
+          setUser(data);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error("Error fetching user data:", error);
+          setLoading(false);
+        });
+    }, 1000);
   }, [id]);
 
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
   return (
-    <>
-    <h1>User Details</h1>
-      {loading ? (
-        <p>Loading user details...</p>
-      ) : user ? (
-        <div>
-          <p><strong>Name:</strong> {user.name}</p>
+    <div>
+      {user ? (
+        <>
+          <h1>User Details</h1>
           <p><strong>Username:</strong> {user.username}</p>
+          <p><strong>Name:</strong> {user.name}</p>
           <p><strong>Email:</strong> {user.email}</p>
           <p><strong>Phone:</strong> {user.phone}</p>
-          <p><strong>Website:</strong> <a href={`https://${user.website}`} target="_blank" rel="noopener noreferrer">{user.website}</a></p>
-        </div>
+          <p><strong>Website:</strong> {user.website}</p>
+        </>
       ) : (
-        <p>User not found</p>
+        <p>User not found.</p>
       )}
-    </>
+    </div>
   );
-};
+}
 
 export default UserDetails;
