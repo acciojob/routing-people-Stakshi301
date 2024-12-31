@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
  
-const UserList = () => {
+const userList = () => {
   const [users, setUsers] = useState([]);
  
   useEffect(()=>{
@@ -24,4 +24,4 @@ const UserList = () => {
   )
 }
  
-export default UserList
+export default userList
