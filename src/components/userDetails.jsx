@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-
+ 
 function UserDetails() {
-  const { id } = useParams();
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-
+  const { id } = useParams(); // Get user ID from URL params
+  const [user, setUser] = useState(null); // State to store user data
+  const [loading, setLoading] = useState(true); // State for loading status
+ 
   useEffect(() => {
     // Simulating a slow network request by adding a delay
     setTimeout(() => {
@@ -45,5 +45,5 @@ function UserDetails() {
     </div>
   );
 }
-
+ 
 export default UserDetails;

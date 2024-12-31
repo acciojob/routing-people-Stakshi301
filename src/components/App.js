@@ -1,6 +1,6 @@
 import React from 'react'
-import userDetails from './userDetails'
-import UserList from './userList'
+import UserDetails from './UserDetails'
+import UserList from './UserList'
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
  
  
@@ -8,8 +8,8 @@ const App = () => {
   return (
   <Router>
     <Routes>
-      <Route path='/' element={<userList />} />
-      <Route path='/users/:id' element={<userDetails />} />
+      <Route path='/' element={<UserList />} />
+      <Route path='/users/:id' element={<UserDetails />} />
     </Routes>
   </Router>
   )
